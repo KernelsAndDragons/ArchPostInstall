@@ -1,0 +1,296 @@
+# Arch Post Install
+
+Enlace al video:
+
+## Configurar archivos del sistema.
+
+### Hosts
+
+```
+sudo nano /etc/hosts
+```
+
+> Reemplaza {hostname} por el nombre de tu máquina
+```
+127.0.0.1  localhost {hostname}
+::1        localhost {hostname}
+```
+
+### Pacman
+
+`sudo nano /etc/pacman.conf
+`
+
+```
+# Misc options  
+ Color  
+ ParallelDownloads = 10  
+ ILoveCandy  
+```
+
+## Servicios y aplicaciones
+
+### Bluetooth
+
+```
+systemctl enable --now bluetooth
+```
+
+### AUR (YAY)
+
+```
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+```
+
+### PAMAC
+
+```
+yay -S libpamac-full pamac-all
+```
+
+### Aplicaciones de Plasma
+
+```
+sudo pacman -S kde-system spectacle ark filelight isoimagewriter kalk kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools
+```
+
+### Bash Scripts
+
+```
+sudo pacman -S bash-completion
+```
+
+### Herramientas de compilación
+
+```
+sudo pacman -S linux-headers base-devel
+```
+
+### Fuse
+
+```
+sudo pacman -S fuse fuse2fs fuseiso
+```
+### Navegador Firefox
+
+```
+sudo pacman -S firefox firefox-i18n-es-es
+```
+
+### MDNS para carpetas compartidas en red
+
+```
+sudo pacman -S avahi nss-mdns
+```
+---
+`sudo nano /etc/nsswitch.conf`
+
+```
+hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
+```
+---
+```
+systemctl enable --now avahi-daemon
+```
+
+### Firewall
+
+```
+sudo pacman -S firewalld python-pyqt6
+```
+
+```
+systemctl enable --now firewalld
+```
+
+```
+sudo firewall-cmd --set-default-zone=home
+sudo firewall-cmd --permanent --add-service=mdns
+```
+
+### Flatpak
+
+```
+sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
+```
+
+### Virtualización
+
+```
+sudo pacman -S qemu-full virt-manager virt-viewer dnsmasq bridge-utils libguestfs ebtables vde2 openbsd-netcat
+```
+
+```
+sudo usermod -aG libvirt $USER
+```
+
+```
+systemctl enable --now libvirtd
+```
+
+### Distrobox
+
+```
+sudo pacman -S podman distrobox
+```
+
+```
+systemctl enable --now podman
+```
+
+### Dependencias de SteamTinkerLaunch
+
+```
+sudo pacman -S xdotool xorg-xwininfo yad 
+```
+
+### Plymouth
+
+```
+sudo pacman -S plymouth
+```
+---
+`sudo nano /etc/mkinitcpio.conf`
+
+```
+HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
+```
+---
+`sudo nano /etc/default/grub`
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
+```
+---
+```
+sudo mkinitcpio -P
+```
+
+### TimeShift
+
+```
+sudo pacman -S grub-btrfs
+```
+
+```
+sudo systemctl enable --now grub-btrfsd.service
+```
+
+```
+yay -S timeshift timeshift-autosnap
+```
+---
+`sudo nano /etc/timeshift-autosnap.conf`
+
+```
+maxSnapshots=10
+```
+---
+```
+sudo mkinitcpio -P
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### Launchers Lutris, Heroic y Steam
+
+#### Heroic
+
+```
+yay -S heroic-games-launcher
+```
+
+#### Lutris
+
+```
+sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
+mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
+lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo \
+sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
+ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 \
+lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader winetricks
+```
+
+```
+sudo pacman -S lutris
+```
+
+#### Steam
+
+```
+sudo pacman -S steam
+```
+
+### XBOX Controller Drivers
+
+```
+yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
+```
+
+## ZSH
+
+```
+sudo pacman -S zsh wget lsd bat git
+```
+
+### Oh-My-ZSH
+
+```
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+```
+
+### Powerlevel10k
+
+```
+sudo pacman -S ttf-hack-nerd  ttf-meslo-nerd
+```
+
+```
+fc-cache -f -v
+```
+
+```
+cd ~
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+---
+`sudo nano ~/.zshrc`
+
+```
+ZSH_THEME="powerlevel10k/powerlevel10k"
+```
+---
+## ZSH PLUGINS (SOLO para Oh-My-ZSH)
+
+```
+cd ~
+
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
+
+git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete
+```
+---
+`nano ~/.zshrc`
+
+```
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+source "$ZSH/oh-my-zsh.sh
+```
+
+```
+# Alias  
+alias ls='lsd'  
+alias ll='lsd -l'  
+alias la='lsd -a'  
+alias lla='lsd -la'  
+alias cat='bat'
+```
+---
