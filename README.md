@@ -67,6 +67,11 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 ```
 yay -S libpamac-full pamac-all
 ```
+### OCTOPI
+
+```
+yay -S octopi
+```
 
 ### Aplicaciones de Plasma
 
