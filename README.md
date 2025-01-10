@@ -30,6 +30,20 @@ sudo nano /etc/hosts
 
 ## Servicios y aplicaciones
 
+### Sensors para refrigeración
+
+```
+sudo pacman -S lm_sensors i2c-tools rrdtool
+```
+
+```
+modprobe i2c_dev
+```
+
+```
+systemctl enable --now sensord.service
+```
+
 ### Bluetooth
 
 ```
