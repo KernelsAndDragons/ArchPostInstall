@@ -247,7 +247,7 @@ sudo pacman -S lutris
 ```
 sudo pacman -S steam
 ```
-#### Proton Tools
+### Proton Tools
 
 ```
 yay -S protonup-qt protontricks
