@@ -56,18 +56,21 @@ sudo pacman -S liquidctl
 systemctl enable --now bluetooth
 ```
 
-### AUR (YAY)
+### AUR 
+
+#### YAY
 
 ```
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 ```
 
-### PAMAC
+#### PAMAC
 
 ```
 yay -S libpamac-full pamac-all
 ```
-### OCTOPI
+
+#### OCTOPI
 
 ```
 yay -S octopi
