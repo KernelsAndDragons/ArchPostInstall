@@ -44,6 +44,12 @@ modprobe i2c_dev
 systemctl enable --now sensord.service
 ```
 
+### Control de refrigeración AIO All-In-One
+
+```
+sudo pacman -S liquidctl
+```
+
 ### Bluetooth
 
 ```
