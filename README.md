@@ -29,7 +29,7 @@ sudo nano /etc/hosts
 ```
 
 ## Instalación de Servicios y aplicaciones
-
+---
 ### Sensors para refrigeración
 
 ```
@@ -49,13 +49,13 @@ systemctl enable --now sensord.service
 ```
 sudo pacman -S liquidctl
 ```
-
+---
 ### Bluetooth
 
 ```
 systemctl enable --now bluetooth
 ```
-
+---
 ### AUR 
 
 #### YAY
@@ -75,7 +75,7 @@ yay -S libpamac-full pamac-all
 ```
 yay -S octopi
 ```
-
+---
 ### Aplicaciones de Plasma
 
 ```
@@ -166,12 +166,6 @@ sudo pacman -S podman distrobox
 systemctl enable --now podman
 ```
 
-### Dependencias de SteamTinkerLaunch
-
-```
-sudo pacman -S xdotool xorg-xwininfo yad 
-```
-
 ### Plymouth
 
 ```
@@ -218,7 +212,7 @@ maxSnapshots=10
 sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
-
+---
 ### Launchers Lutris, Heroic y Steam
 
 #### Heroic
@@ -259,6 +253,12 @@ yay -S protonup-qt protontricks
 yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
 ```
 
+### Dependencias de SteamTinkerLaunch
+
+```
+sudo pacman -S xdotool xorg-xwininfo yad 
+```
+---
 ## ZSH
 
 ```
