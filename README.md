@@ -79,7 +79,7 @@ yay -S octopi
 ### Aplicaciones de Plasma
 
 ```
-sudo pacman -S kde-system spectacle ark filelight isoimagewriter kalk kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools
+sudo pacman -S kde-system spectacle ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools
 ```
 
 ### Bash Scripts
