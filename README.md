@@ -2,7 +2,7 @@
 
 Enlace al video:
 
-## Configurar archivos del sistema.
+## Configuración de archivos del sistema.
 
 ### Hosts
 
@@ -28,7 +28,7 @@ sudo nano /etc/hosts
  ILoveCandy  
 ```
 
-## Servicios y aplicaciones
+## Instalación de Servicios y aplicaciones
 
 ### Sensors para refrigeración
 
