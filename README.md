@@ -29,7 +29,7 @@ sudo nano /etc/hosts
 ```
 
 ## Instalación de Servicios y aplicaciones
----
+
 ### Sensors para refrigeración
 
 ```
