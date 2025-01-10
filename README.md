@@ -79,7 +79,7 @@ yay -S octopi
 ### Aplicaciones de Plasma
 
 ```
-sudo pacman -S kde-system spectacle gwenview ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools
+sudo pacman -S kde-system spectacle gwenview ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools okular kgpg
 ```
 
 ### Bash Scripts
@@ -246,6 +246,11 @@ sudo pacman -S lutris
 
 ```
 sudo pacman -S steam
+```
+#### Proton Tools
+
+```
+yay -S protonup-qt protontricks
 ```
 
 ### XBOX Controller Drivers
