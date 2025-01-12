@@ -275,7 +275,27 @@ yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
 ```
 sudo pacman -S xdotool xorg-xwininfo yad 
 ```
----
+
+## Oh-My-Bash
+
+via curl
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+```
+
+via wget
+```
+bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+```
+
+THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
+
+`sudo nano .bashrc`
+
+```
+OSH_THEME="standard"
+```
+
 ## ZSH
 
 ```
@@ -345,22 +365,4 @@ alias cat='bat'
 ```
 ---
 
-## Oh-My-Bash
 
-via curl
-```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
-```
-
-via wget
-```
-bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
-```
-
-THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
-
-`sudo nano .bashrc`
-
-```
-OSH_THEME="standard"
-```
