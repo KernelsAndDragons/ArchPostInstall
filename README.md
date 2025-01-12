@@ -212,7 +212,24 @@ maxSnapshots=10
 sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
+## AppArmor
+
+```
+sudo systemctl enable apparmor.service
+```
 ---
+```
+sudo nano /etc/default/grub
+```
+```
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
+```
+---
+
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 ### Launchers Lutris, Heroic y Steam
 
 #### Heroic
@@ -327,3 +344,23 @@ alias lla='lsd -la'
 alias cat='bat'
 ```
 ---
+
+## Oh-My-Bash
+
+via curl
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+```
+
+via wget
+```
+bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
+```
+
+THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
+
+`sudo nano .bashrc`
+
+```
+OSH_THEME="standard"
+```
