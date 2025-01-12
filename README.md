@@ -59,7 +59,7 @@ sudo pacman -S powerdevil power-profiles-daemon
 ```
 systemctl enable --now power-profiles-daemon.service
 ```
-
+----
 ### Bluetooth
 
 ```
