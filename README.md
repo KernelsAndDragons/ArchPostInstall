@@ -2,9 +2,9 @@
 
 Enlace al video:
 
-## Configuración de archivos del sistema.
+# Configuración de archivos del sistema.
 
-### Hosts
+## Hosts
 
 ```
 sudo nano /etc/hosts
@@ -16,7 +16,7 @@ sudo nano /etc/hosts
 ::1        localhost {hostname}
 ```
 
-### Pacman
+## Pacman
 
 `sudo nano /etc/pacman.conf
 `
@@ -28,9 +28,9 @@ sudo nano /etc/hosts
  ILoveCandy  
 ```
 
-## Instalación de Servicios y aplicaciones
+# Instalación de Servicios y aplicaciones
 
-### Sensors para refrigeración
+## Sensors para refrigeración
 
 ```
 sudo pacman -S lm_sensors i2c-tools rrdtool
@@ -44,13 +44,13 @@ modprobe i2c_dev
 systemctl enable --now sensord.service
 ```
 
-### Control de refrigeración AIO All-In-One
+## Control de refrigeración AIO All-In-One
 
 ```
 sudo pacman -S liquidctl
 ```
 
-### Gestión de energía (KDE PLASMA)
+## Gestión de energía (KDE PLASMA)
 
 ```
 sudo pacman -S powerdevil power-profiles-daemon
@@ -60,62 +60,62 @@ sudo pacman -S powerdevil power-profiles-daemon
 systemctl enable --now power-profiles-daemon.service
 ```
 ----
-### Bluetooth
+## Bluetooth
 
 ```
 systemctl enable --now bluetooth
 ```
 ---
-### AUR 
+## AUR 
 
-#### YAY
+### YAY
 
 ```
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 ```
 
-#### PAMAC
+### PAMAC
 
 ```
 yay -S libpamac-full pamac-all
 ```
 
-#### OCTOPI
+### OCTOPI
 
 ```
 yay -S octopi
 ```
 ---
-### Aplicaciones de Plasma
+## Aplicaciones de Plasma
 
 ```
 sudo pacman -S kde-system spectacle gwenview ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools okular kgpg
 ```
 
-### Bash Scripts
+## Bash Scripts
 
 ```
 sudo pacman -S bash-completion
 ```
 
-### Herramientas de compilación
+## Herramientas de compilación
 
 ```
 sudo pacman -S linux-headers base-devel
 ```
 
-### Fuse
+## Fuse
 
 ```
 sudo pacman -S fuse fuse2fs fuseiso
 ```
-### Navegador Firefox
+## Navegador Firefox
 
 ```
 sudo pacman -S firefox firefox-i18n-es-es
 ```
 
-### MDNS para carpetas compartidas en red
+## MDNS para carpetas compartidas en red
 
 ```
 sudo pacman -S avahi nss-mdns
@@ -131,7 +131,7 @@ hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files
 systemctl enable --now avahi-daemon
 ```
 
-### Firewall
+## Firewall
 
 ```
 sudo pacman -S firewalld python-pyqt6
@@ -146,13 +146,13 @@ sudo firewall-cmd --set-default-zone=home
 sudo firewall-cmd --permanent --add-service=mdns
 ```
 
-### Flatpak
+## Flatpak
 
 ```
 sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
 ```
 
-### Virtualización
+## Virtualización
 
 ```
 sudo pacman -S qemu-full virt-manager virt-viewer dnsmasq bridge-utils libguestfs ebtables vde2 openbsd-netcat
@@ -166,7 +166,7 @@ sudo usermod -aG libvirt $USER
 systemctl enable --now libvirtd
 ```
 
-### Distrobox
+## Distrobox
 
 ```
 sudo pacman -S podman distrobox
@@ -176,7 +176,7 @@ sudo pacman -S podman distrobox
 systemctl enable --now podman
 ```
 
-### Plymouth
+## Plymouth
 
 ```
 sudo pacman -S plymouth
@@ -198,7 +198,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 sudo mkinitcpio -P
 ```
 
-### TimeShift
+## TimeShift
 
 ```
 sudo pacman -S grub-btrfs
@@ -240,15 +240,15 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-### Launchers Lutris, Heroic y Steam
+## Launchers Lutris, Heroic y Steam
 
-#### Heroic
+### Heroic
 
 ```
 yay -S heroic-games-launcher
 ```
 
-#### Lutris
+### Lutris
 
 ```
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
@@ -263,24 +263,24 @@ lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader l
 sudo pacman -S lutris
 ```
 
-#### Steam
+### Steam
 
 ```
 sudo pacman -S steam
 ```
-### Proton Tools
+## Proton Tools
 
 ```
 yay -S protonup-qt protontricks
 ```
 
-### XBOX Controller Drivers
+## XBOX Controller Drivers
 
 ```
 yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
 ```
 
-### Dependencias de SteamTinkerLaunch
+## Dependencias de SteamTinkerLaunch
 
 ```
 sudo pacman -S xdotool xorg-xwininfo yad 
@@ -306,19 +306,19 @@ THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
 OSH_THEME="standard"
 ```
 
-## ZSH
+# ZSH
 
 ```
 sudo pacman -S zsh wget lsd bat git
 ```
 
-### Oh-My-ZSH
+## Oh-My-ZSH
 
 ```
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 ```
 
-### Powerlevel10k
+## Powerlevel10k
 
 ```
 sudo pacman -S ttf-hack-nerd  ttf-meslo-nerd
