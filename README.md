@@ -6,9 +6,7 @@ Enlace al video:
 
 ## Hosts
 
-```
-sudo nano /etc/hosts
-```
+`sudo nano /etc/hosts`
 
 > Reemplaza {hostname} por el nombre de tu máquina
 ```
