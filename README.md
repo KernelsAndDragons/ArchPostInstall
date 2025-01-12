@@ -49,7 +49,17 @@ systemctl enable --now sensord.service
 ```
 sudo pacman -S liquidctl
 ```
----
+
+### Gestión de energía (KDE PLASMA)
+
+```
+sudo pacman -S powerdevil power-profiles-daemon
+```
+
+```
+systemctl enable --now power-profiles-daemon.service
+```
+
 ### Bluetooth
 
 ```
