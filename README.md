@@ -228,9 +228,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 sudo systemctl enable apparmor.service
 ```
 ---
-```
-sudo nano /etc/default/grub
-```
+`sudo nano /etc/default/grub`
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
 ```
