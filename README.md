@@ -37,7 +37,6 @@ sudo pacman -S lm_sensors i2c-tools rrdtool
 ```
 modprobe i2c_dev
 ```
-
 ```
 systemctl enable --now sensord.service
 ```
@@ -158,7 +157,7 @@ yay -S snapd
 ```
 systemctl enable --now snapd.service
 ```
-
+> Si utilizas apparmor ejecutar el siguiente comando. 
 ```
 systemctl enable --now snapd.apparmor.service
 ```
