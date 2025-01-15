@@ -150,6 +150,13 @@ sudo firewall-cmd --permanent --add-service=mdns
 sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
 ```
 
+## Snap
+
+```
+yay -S snapd
+```
+
+
 ## Virtualización
 
 ```
@@ -221,6 +228,10 @@ sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 ## AppArmor
+
+```
+sudo pacman -S apparmor
+```
 
 ```
 sudo systemctl enable apparmor.service
@@ -296,7 +307,7 @@ bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/too
 
 THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
 
-`sudo nano .bashrc`
+`nano .bashrc`
 
 ```
 OSH_THEME="standard"
