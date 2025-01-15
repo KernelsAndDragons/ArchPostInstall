@@ -155,7 +155,13 @@ sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
 ```
 yay -S snapd
 ```
+```
+systemctl enable --now snapd.service
+```
 
+```
+systemctl enable --now snapd.apparmor.service
+```
 
 ## Virtualización
 
