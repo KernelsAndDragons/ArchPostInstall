@@ -312,7 +312,7 @@ bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/too
 
 THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
 
-`nano .bashrc`
+`nano ~/.bashrc`
 
 ```
 OSH_THEME="standard"
@@ -345,7 +345,7 @@ cd ~
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 ---
-`sudo nano ~/.zshrc`
+`nano ~/.zshrc`
 
 ```
 ZSH_THEME="powerlevel10k/powerlevel10k"
