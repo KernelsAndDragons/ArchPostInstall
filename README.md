@@ -1,6 +1,6 @@
 # Arch Post Install
 
-Enlace al video:
+Enlace al video: https://www.youtube.com/watch?v=YG2oQgGhdIQ
 
 # Configuración de archivos del sistema.
 
