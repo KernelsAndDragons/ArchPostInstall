@@ -35,8 +35,34 @@ sudo pacman -S lm_sensors i2c-tools rrdtool
 ```
 
 ```
-modprobe i2c_dev
+sudo modprobe i2c_dev
 ```
+
+  intel
+  ```
+  sudo modprobe i2c-i801
+  ```
+  amd
+  ```
+  sudo modprobe i2c-piix4
+  ```
+
+Añadir permanentemente los modulos
+
+```
+sudo touch /etc/modules-load.d/i2c.conf
+sudo sh -c 'echo "i2c-dev" >> /etc/modules-load.d/i2c.conf'
+```
+
+  intel
+  ```
+  sudo sh -c 'echo "i2c-i801" >> /etc/modules-load.d/i2c.conf'
+  ```
+  amd
+  ```
+  sudo sh -c 'echo "i2c-piix4" >> /etc/modules-load.d/i2c.conf'
+  ```
+
 ```
 systemctl enable --now sensord.service
 ```
