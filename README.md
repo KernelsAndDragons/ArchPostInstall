@@ -47,7 +47,7 @@ sudo modprobe i2c_dev
   sudo modprobe i2c-piix4
   ```
 
-Añadir permanentemente los modulos
+### Añadir permanentemente los modulos
 
 ```
 sudo touch /etc/modules-load.d/i2c.conf
