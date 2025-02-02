@@ -37,6 +37,9 @@ sudo pacman -S lm_sensors i2c-tools rrdtool
 ```
 sudo modprobe i2c_dev
 ```
+```
+systemctl enable --now sensord.service
+```
 ---
   intel
   ```
@@ -47,9 +50,6 @@ sudo modprobe i2c_dev
   sudo modprobe i2c-piix4
   ```
 ---
-```
-systemctl enable --now sensord.service
-```
 
 ### Añadir los módulos permanentemente 
 
