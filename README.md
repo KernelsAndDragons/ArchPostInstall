@@ -51,7 +51,7 @@ sudo modprobe i2c_dev
 systemctl enable --now sensord.service
 ```
 
-### Añadir permanentemente los modulos
+### Añadir los módulos permanentemente 
 
 ```
 sudo touch /etc/modules-load.d/i2c.conf
