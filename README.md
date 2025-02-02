@@ -57,7 +57,7 @@ systemctl enable --now sensord.service
 sudo touch /etc/modules-load.d/i2c.conf
 sudo sh -c 'echo "i2c-dev" >> /etc/modules-load.d/i2c.conf'
 ```
-
+---
   intel
   ```
   sudo sh -c 'echo "i2c-i801" >> /etc/modules-load.d/i2c.conf'
@@ -66,7 +66,7 @@ sudo sh -c 'echo "i2c-dev" >> /etc/modules-load.d/i2c.conf'
   ```
   sudo sh -c 'echo "i2c-piix4" >> /etc/modules-load.d/i2c.conf'
   ```
-
+---
 
 
 ## Control de refrigeración AIO All-In-One
