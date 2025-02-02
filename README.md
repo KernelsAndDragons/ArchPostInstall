@@ -47,6 +47,10 @@ sudo modprobe i2c_dev
   sudo modprobe i2c-piix4
   ```
 
+```
+systemctl enable --now sensord.service
+```
+
 ### Añadir permanentemente los modulos
 
 ```
@@ -63,9 +67,7 @@ sudo sh -c 'echo "i2c-dev" >> /etc/modules-load.d/i2c.conf'
   sudo sh -c 'echo "i2c-piix4" >> /etc/modules-load.d/i2c.conf'
   ```
 
-```
-systemctl enable --now sensord.service
-```
+
 
 ## Control de refrigeración AIO All-In-One
 
