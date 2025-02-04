@@ -325,6 +325,10 @@ yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
 ```
 sudo pacman -S xdotool xorg-xwininfo yad 
 ```
+## Gamemode
+```
+sudo pacman -S gamemode
+```
 
 ## Oh-My-Bash
 
