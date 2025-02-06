@@ -235,6 +235,23 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ```
 sudo mkinitcpio -P
 ```
+## Snapper
+
+```
+yay -S btrfs-assistant
+yay -S grub-btrfs
+yay -S snap-pac-git
+yay -S snapper
+yay -S snapper-tools
+yay -S snapper-support
+```
+```
+sudo snapper -c root create-config /
+echo "first manual snapshot"
+snapper -c root create --description "initial snapshot"
+sudo chmod a+rx /.snapshots
+sudo chown :users /.snapshots
+```
 
 ## TimeShift
 
