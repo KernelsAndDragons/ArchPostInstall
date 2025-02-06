@@ -204,6 +204,11 @@ sudo usermod -aG libvirt $USER
 systemctl enable --now libvirtd
 ```
 
+```
+sudo virsh net-start default
+sudo virsh net-autostart default
+```
+
 ## Distrobox
 
 ```
