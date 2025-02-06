@@ -238,7 +238,7 @@ HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap conso
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ```
 ### Systemd-boot
-`sudo nano  boot/loader/entries/*.conf `
+`sudo nano  /boot/loader/entries/*.conf `
 
 add `quiet` and `splash`
 ```
