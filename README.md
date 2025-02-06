@@ -243,12 +243,7 @@ sudo mkinitcpio -P
 ## Snapper
 
 ```
-yay -S btrfs-assistant
-yay -S grub-btrfs
-yay -S snap-pac-git
-yay -S snapper
-yay -S snapper-tools
-yay -S snapper-support
+yay -S btrfs-assistant grub-btrfs snap-pac-git snapper snapper-tools snapper-support
 ```
 ```
 sudo snapper -c root create-config /
