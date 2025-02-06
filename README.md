@@ -257,6 +257,10 @@ Note: If you are using the suggested Btrfs partition layout from archinstall the
 ```
 
 ```
+sudo btrfs subvolume delete @.snapshots/
+```
+
+```
 sudo snapper -c root create-config /
 echo "first manual snapshot"
 snapper -c root create --description "initial snapshot"
