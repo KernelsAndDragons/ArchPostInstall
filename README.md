@@ -240,33 +240,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ```
 sudo mkinitcpio -P
 ```
-## Snapper
-
-```
-yay -S btrfs-assistant grub-btrfs snap-pac-git snapper snapper-tools snapper-support
-```
-
-```
-Note: If you are using the suggested Btrfs partition layout from archinstall then the @.snapshots subvolume will already be mounted to /.snapshots, and the snapper create-config command will fail [1]. To use the @.snapshots subvolume for Snapper backups, do the following:
-
-1. Unmount the @.snapshots subvolume and delete the existing mountpoint.
-2. Create the Snapper config.
-3. Delete the subvolume created by Snapper.
-4. Re-create the /.snapshots mount point and re-mount the @.snapshots subvolume.
-
-```
-
-```
-sudo btrfs subvolume delete @.snapshots/
-```
-
-```
-sudo snapper -c root create-config /
-echo "first manual snapshot"
-snapper -c root create --description "initial snapshot"
-sudo chmod a+rx /.snapshots
-sudo chown :users /.snapshots
-```
 
 ## TimeShift
 
