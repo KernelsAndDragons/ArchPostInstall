@@ -312,6 +312,8 @@ maxSnapshots=10
 sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
+---
+
 ## AppArmor
 
 ```
