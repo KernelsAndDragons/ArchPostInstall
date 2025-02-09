@@ -315,7 +315,7 @@ sudo chown :wheel /.snapshots
 
 Paso 6: Crear snapshot
 ```
-sudo snapper -c root create -d "**Base system install**"
+sudo snapper -c root create -d "**Sistema base**"
 ```
 
 Paso 7: Automatizar los snapshots
