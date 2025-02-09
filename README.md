@@ -271,7 +271,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 # Snapshots
-> He remplazado Timeshift por Snapper.
+> He reemplazado Timeshift por Snapper.
 ## Snapper 
 
 ```
