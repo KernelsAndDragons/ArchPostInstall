@@ -271,7 +271,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 # Snapshots
-## Snapper (Es mejor que timeshift)
+> He remplazado Timeshift por Snapper.
+## Snapper 
 
 ```
 sudo pacman -S snapper snap-pac grub-btrfs locate
