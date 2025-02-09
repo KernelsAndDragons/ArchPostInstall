@@ -348,7 +348,7 @@ sudo mkinitcpio -P
 
 Paso 11: ¡Utilizar la aplicación grafica btrfs-assistant para gestionar comodamente la programación y los snapshots!
 
-# Launchers Lutris, Heroic y Steam y Herramientas Gaming
+# Launchers Lutris, Heroic, Steam y Herramientas Gaming
 
 ## Heroic
 
