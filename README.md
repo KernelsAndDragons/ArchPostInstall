@@ -286,7 +286,7 @@ Podemos ver los subvolumenes con el comando:
 ```
 sudo btrfs subvolume list /
 ```
-Paso 1: Eliminar el directorio .snapshots
+Paso 1: Eliminar el directorio `/.snapshots`
 ```
 cd /
 sudo umount /.snapshots
