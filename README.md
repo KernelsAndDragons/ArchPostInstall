@@ -248,6 +248,27 @@ options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootf
 ```
 sudo mkinitcpio -P
 ```
+
+## AppArmor
+
+```
+sudo pacman -S apparmor
+```
+
+```
+sudo systemctl enable apparmor.service
+```
+---
+`sudo nano /etc/default/grub`
+```
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
+```
+---
+
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 # Snapshots
 ## Snapper (recomendado)
 ```
@@ -313,37 +334,16 @@ sudo mkinitcpio -P
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 ---
----
 
-## AppArmor
+# Launchers Lutris, Heroic y Steam
 
-```
-sudo pacman -S apparmor
-```
-
-```
-sudo systemctl enable apparmor.service
-```
----
-`sudo nano /etc/default/grub`
-```
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
-```
----
-
-```
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-## Launchers Lutris, Heroic y Steam
-
-### Heroic
+## Heroic
 
 ```
 yay -S heroic-games-launcher
 ```
 
-### Lutris
+## Lutris
 
 ```
 sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
@@ -358,7 +358,7 @@ lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader l
 sudo pacman -S lutris
 ```
 
-### Steam
+## Steam
 
 ```
 sudo pacman -S steam
@@ -384,7 +384,7 @@ sudo pacman -S xdotool xorg-xwininfo yad
 ```
 sudo pacman -S gamemode
 ```
-
+# Bash
 ## Oh-My-Bash
 
 via curl
