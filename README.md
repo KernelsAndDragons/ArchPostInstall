@@ -279,7 +279,8 @@ sudo pacman -S snapper snap-pac grub-btrfs locate
 ```
 yay -S btrfs-assistant
 ```
-> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots** debes realizar los siguientes pasos.
+
+> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots** debes desmontar y eliminar el directorio `/.snapshots` **para que el Paso 2 no falle**.
 
 Podemos ver los subvolumenes con el comando:
 ```
