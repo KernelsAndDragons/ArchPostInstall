@@ -325,7 +325,9 @@ sudo systemctl enable --now snapper-cleanup.timer
 ```
 
 Paso 8: Añadir excepción de indexado para `locate`
+
 `sudo nano /etc/updatedb.conf`
+
 Añadir `.snapshots`
 ```
 PRUNENAMES = ".git .hg .svn .snapshots"
