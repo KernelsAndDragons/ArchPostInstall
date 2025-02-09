@@ -248,6 +248,45 @@ options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootf
 ```
 sudo mkinitcpio -P
 ```
+# Snapshots
+## Snapper (recomendado)
+```
+yay -S snapper-support btrfs-assistant
+```
+> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots** debes realizar los siguientes pasos.
+
+Podemos ver los subvolumenes con el comando:
+```
+sudo btrfs subvolume list /
+```
+
+```
+sudo umount /.snapshots
+sudo rm -rf /.snapshots
+```
+
+```
+sudo snapper -c root create-config /
+```
+
+```
+sudo btrfs subvolume delete .snapshots
+```
+
+```
+sudo mkdir /.snapshots
+sudo mount -a
+```
+
+```
+sudo chmod 750 /.snapshots
+sudo chown :wheel /.snapshots
+```
+
+Crear snapshot
+```
+sudo snapper -c root create -d "**Base system install**"
+```
 
 ## TimeShift
 
