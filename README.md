@@ -38,7 +38,7 @@ sudo pacman -S lm_sensors i2c-tools rrdtool
 sudo modprobe i2c_dev
 ```
 ```
-systemctl enable --now sensord.service
+sudo systemctl enable --now sensord.service
 ```
 ---
   intel
@@ -82,13 +82,13 @@ sudo pacman -S powerdevil power-profiles-daemon
 ```
 
 ```
-systemctl enable --now power-profiles-daemon.service
+sudo systemctl enable --now power-profiles-daemon.service
 ```
 ----
 ## Bluetooth
 
 ```
-systemctl enable --now bluetooth
+sudo systemctl enable --now bluetooth
 ```
 ---
 ## AUR 
@@ -153,7 +153,7 @@ hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files
 ```
 ---
 ```
-systemctl enable --now avahi-daemon
+sudo systemctl enable --now avahi-daemon
 ```
 
 ## Firewall
@@ -163,7 +163,7 @@ sudo pacman -S firewalld python-pyqt6
 ```
 
 ```
-systemctl enable --now firewalld
+sudo systemctl enable --now firewalld
 ```
 
 ```
@@ -183,11 +183,11 @@ sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
 yay -S snapd
 ```
 ```
-systemctl enable --now snapd.service
+sudo systemctl enable --now snapd.service
 ```
 > Si utilizas apparmor ejecutar el siguiente comando. 
 ```
-systemctl enable --now snapd.apparmor.service
+sudo systemctl enable --now snapd.apparmor.service
 ```
 
 ## Virtualización
@@ -201,7 +201,7 @@ sudo usermod -aG libvirt $USER
 ```
 
 ```
-systemctl enable --now libvirtd
+sudo systemctl enable --now libvirtd
 ```
 
 ```
@@ -216,7 +216,7 @@ sudo pacman -S podman distrobox
 ```
 
 ```
-systemctl enable --now podman
+sudo systemctl enable --now podman
 ```
 
 ## Plymouth
@@ -227,6 +227,7 @@ sudo pacman -S plymouth
 ---
 `sudo nano /etc/mkinitcpio.conf`
 
+añadir `plymouth`
 ```
 HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
 ```
@@ -266,13 +267,17 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor
 ---
 
 ```
-grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 # Snapshots
-## Snapper (recomendado)
+## Snapper 
+
 ```
-yay -S snapper-support btrfs-assistant
+sudo pacman -S snapper snap-pac grub-btrfs locate
+```
+```
+yay -S btrfs-assistant
 ```
 > Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots** debes realizar los siguientes pasos.
 
@@ -280,60 +285,65 @@ Podemos ver los subvolumenes con el comando:
 ```
 sudo btrfs subvolume list /
 ```
-
+Paso 1: Eliminar el directorio .snapshots
 ```
+cd /
 sudo umount /.snapshots
 sudo rm -rf /.snapshots
 ```
-
+Paso 2: Crear configuración de snapper
 ```
 sudo snapper -c root create-config /
 ```
 
+Paso 3: Eliminar subvolumen creado por snapper
 ```
 sudo btrfs subvolume delete .snapshots
 ```
 
+Paso 4: Crear otra vez el directorio `.snapshots` para montarlo con subvolumen `@.snapshots`
 ```
 sudo mkdir /.snapshots
 sudo mount -a
 ```
-
+Paso 5: Corregir los permisos necesarios para `/.snapshots`
 ```
 sudo chmod 750 /.snapshots
 sudo chown :wheel /.snapshots
 ```
 
-Crear snapshot
+Paso 6: Crear snapshot
 ```
 sudo snapper -c root create -d "**Base system install**"
 ```
 
-## TimeShift
-
+Paso 7: Automatizar los snapshots
 ```
-sudo pacman -S grub-btrfs
-```
-
-```
-sudo systemctl enable --now grub-btrfsd.service
+sudo systemctl enable --now snapper-timeline.timer
+sudo systemctl enable --now snapper-cleanup.timer
 ```
 
+Paso 8: Añadir excepción de indexado para `locate`
+`sudo nano /etc/updatedb.conf`
+Añadir `.snapshots`
 ```
-yay -S timeshift timeshift-autosnap
+PRUNENAMES = ".git .hg .svn .snapshots"
 ```
----
-`sudo nano /etc/timeshift-autosnap.conf`
-
+Paso 9: Habilitar grub-btrfs
 ```
-maxSnapshots=10
+sudo systemctl enable --now grub-btrfsd.service 
 ```
----
+Paso 10: Crear condición de arranque a un snapshot con permisos readonly
+`sudo nano /etc/mkinitcpio.conf`
+añadir `grub-btrfs-overlayfs`
+```
+HOOKS=(base ... fsck grub-btrfs-overlayfs)
+```
 ```
 sudo mkinitcpio -P
-sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
----
+
+Paso 11: ¡Utilizar la aplicación grafica btrfs-assistant para gestionar comodamente la programación y los snapshots!
 
 # Launchers Lutris, Heroic y Steam
 
