@@ -269,13 +269,22 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor
 ```
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
+## Locate
+
+```
+sudo pacman -S locate
+```
+```
+sudo updatedb
+```
+
 
 # Snapshots
 > He reemplazado Timeshift por Snapper.
 ## Snapper 
 
 ```
-sudo pacman -S snapper snap-pac grub-btrfs locate
+sudo pacman -S snapper snap-pac grub-btrfs
 ```
 ```
 yay -S btrfs-assistant
@@ -333,6 +342,10 @@ Añadir `.snapshots`
 ```
 PRUNENAMES = ".git .hg .svn .snapshots"
 ```
+Actualizar la base de datos
+```
+sudo updatedb
+```
 Paso 9: Habilitar grub-btrfs
 ```
 sudo systemctl enable --now grub-btrfsd.service 
@@ -346,12 +359,7 @@ HOOKS=(base ... fsck grub-btrfs-overlayfs)
 ```
 sudo mkinitcpio -P
 ```
-Paso 11: Actualizar la base de datos para que locate funcione.
-```
-sudo updatedb
-```
-
-Paso 12: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
+Paso 11: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
 
 # Launchers Lutris, Heroic, Steam y Herramientas Gaming
 
