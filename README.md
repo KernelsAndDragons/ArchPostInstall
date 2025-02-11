@@ -281,7 +281,7 @@ sudo pacman -S snapper snap-pac grub-btrfs locate
 yay -S btrfs-assistant
 ```
 
-> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots** debes desmontar y eliminar el directorio `/.snapshots` **para que el Paso 2 no falle**.
+> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots**, debes desmontar y eliminar el directorio `/.snapshots` **para que el Paso 2 no falle**.
 
 Podemos ver los subvolumenes con el comando:
 ```
@@ -347,7 +347,7 @@ HOOKS=(base ... fsck grub-btrfs-overlayfs)
 sudo mkinitcpio -P
 ```
 
-Paso 11: ¡Utilizar la aplicación grafica btrfs-assistant para gestionar comodamente la programación y los snapshots!
+Paso 11: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
 
 # Launchers Lutris, Heroic, Steam y Herramientas Gaming
 
