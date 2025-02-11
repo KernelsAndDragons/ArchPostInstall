@@ -346,8 +346,12 @@ HOOKS=(base ... fsck grub-btrfs-overlayfs)
 ```
 sudo mkinitcpio -P
 ```
+Paso 11: Actualizar la base de datos para que locate funcione.
+```
+sudo updatedb
+```
 
-Paso 11: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
+Paso 12: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
 
 # Launchers Lutris, Heroic, Steam y Herramientas Gaming
 
