@@ -58,6 +58,11 @@ rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 ```
 rm /etc/pacman.d/mirrorlist.backup
 ```
+## Firmware Updater
+
+```
+sudo pacman -S fwupd
+```
 
 # Instalación de Servicios y aplicaciones
 
