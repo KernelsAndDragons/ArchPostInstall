@@ -286,6 +286,7 @@ sudo pacman -S apparmor
 sudo systemctl enable apparmor.service
 ```
 > Puedes encontrar varios perfiles predefinidos de Apparmor en la ruta `/usr/share/apparmor/extra-profiles`
+
 > Puedes obtener información del uso de perfiles con `cat /usr/share/apparmor/extra-profiles/README`
 
 ### Grub
