@@ -541,4 +541,35 @@ echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlight
 ```
 ---
 
+## Fastfetch Mejorado
 
+Instalar fastfetch
+```
+sudo pacman -S fastfetch
+```
+Navega a tu directorio .config 
+```
+cd ~/.config
+```
+Si no ves una carpeta fastfetch , crea una 
+```
+mkdir -p fastfetch
+```
+Genera la configuración por defecto 
+```
+fastfetch --gen-config
+```
+Elimina el archivo de configuración por defecto 
+```
+rm fastfetch/config.jsonc
+```
+Descarga mi configuración actualizada 
+```
+wget https://raw.githubusercontent.com/KernelsAndDragons/ArchPostInstall/refs/heads/main/config.jsonc
+```
+Cierra tu terminal y ábrela de nuevo.
+
+Ahora, ejecuta 
+```
+fastfetch
+```
