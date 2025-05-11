@@ -313,7 +313,8 @@ sudo pacman -S locate
 ```
 sudo updatedb
 ```
-
+> Puedes encontrar varios perfiles predefinidos de Apparmor en la ruta `/usr/share/apparmor/extra-profiles`
+> Puedes obtener información del uso de perfiles con `cat /usr/share/apparmor/extra-profiles/README`
 
 # Snapshots
 > He reemplazado Timeshift por Snapper.
