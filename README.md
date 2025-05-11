@@ -499,11 +499,23 @@ Los plugins se descargan en la ruta `/usr/share/zsh/plugins/`
 
 Añadimos los plugins al fichero `.zshrc` 
 ```
+echo '# PLUGINS' >> ~/.zshrc
 echo 'source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh' >> ~/.zshrc
 echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh' >> ~/.zshrc
 echo 'source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh' >> ~/.zshrc
 echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh' >> ~/.zshrc
 ```
+(paso opcional) Añadimos los alias para lsd y bat
+
+```
+echo '# ALIAS' >> ~/.zshrc
+echo "alias ls='lsd'" >> ~/.zshrc
+echo "alias ll='lsd -l'" >> ~/.zshrc
+echo "alias la='lsd -a'" >> ~/.zshrc
+echo "alias lla='lsd -la'" >> ~/.zshrc
+echo "alias cat='bat'" >> ~/.zshrc
+```
+
 ---
 ## (NO RECOMENDADO) ZSH PLUGINS (SOLO para Oh-My-ZSH) 
 
