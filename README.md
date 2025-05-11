@@ -54,6 +54,7 @@ Generar el nuevo mirrorlist con los 6 repositorios más rápidos (puedes modific
 ```
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 ```
+(opcional) Puedes eliminar la copia temporal.
 ```
 rm /etc/pacman.d/mirrorlist.backup
 ```
