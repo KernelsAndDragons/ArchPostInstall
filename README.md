@@ -567,7 +567,7 @@ fastfetch --gen-config
 ```
 Elimina el archivo de configuración por defecto 
 ```
-rm fastfetch/config.jsonc
+rm config.jsonc
 ```
 Descarga mi configuración actualizada 
 ```
