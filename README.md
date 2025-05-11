@@ -575,3 +575,6 @@ fastfetch
 ```
 ![fastfetch](https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png)
 
+# ICONOS
+
+Puedes descargar iconos `.svg` de arch [aquí](https://github.com/KernelsAndDragons/ArchPostInstall/tree/main/icons)
