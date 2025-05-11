@@ -33,7 +33,7 @@ Instalar las dependencias
 ```
 sudo pacman -S  pacman-contrib
 ```
-(Opcional) Añadir todos los mirrors.
+(Opcional) añadir todos los mirrors.
 > Omite este paso para utilizar tus mirrors activados actualmente.
 ```
 curl https://archlinux.org/mirrorlist/all/ > /etc/pacman.d/mirrorlist
@@ -54,7 +54,7 @@ Generar el nuevo mirrorlist con los 6 repositorios más rápidos (puedes modific
 ```
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 ```
-(opcional) Puedes eliminar la copia temporal.
+(Opcional) puedes eliminar la copia temporal.
 ```
 rm /etc/pacman.d/mirrorlist.backup
 ```
