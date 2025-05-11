@@ -552,13 +552,13 @@ Instalar fastfetch
 ```
 sudo pacman -S fastfetch
 ```
-Navega a tu directorio .config 
+Navega a tu directorio `.config/fastfetch`
 ```
-cd ~/.config
+cd ~/.config/fastfetch
 ```
 Si no ves una carpeta fastfetch , crea una 
 ```
-mkdir -p fastfetch
+mkdir -p ~/.config/fastfetch
 ```
 Genera la configuración por defecto 
 ```
