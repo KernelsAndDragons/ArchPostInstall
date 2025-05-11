@@ -490,7 +490,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 ---
-## (RECOMENDADO) ZSH PLUGINS  
+## ZSH PLUGINS  
 
 ```
 sudo pacman -S zsh-autocomplete zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting 
@@ -516,41 +516,6 @@ echo "alias lla='lsd -la'" >> ~/.zshrc
 echo "alias cat='bat'" >> ~/.zshrc
 ```
 
----
-## (NO RECOMENDADO) ZSH PLUGINS (SOLO para Oh-My-ZSH) 
-
-```
-cd ~
-
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
-
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-
-git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autocomplete
-```
----
-`nano ~/.zshrc`
-
-```
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)
-
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-
-source "$ZSH/oh-my-zsh.sh
-```
-
-```
-# Alias  
-alias ls='lsd'  
-alias ll='lsd -l'  
-alias la='lsd -a'  
-alias lla='lsd -la'  
-alias cat='bat'
-```
 ---
 
 
