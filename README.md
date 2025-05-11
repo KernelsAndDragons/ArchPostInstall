@@ -38,18 +38,19 @@ sudo pacman -S  pacman-contrib
 ```
 curl https://archlinux.org/mirrorlist/all/ > /etc/pacman.d/mirrorlist
 ```
-Ordenar los mirrors
+Generar el backup y una copia temporal.
 ```
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 ```
+Activar todos los repositorios de mirrorlist.backup
 ```
 awk '/^## Country Name$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /etc/pacman.d/mirrorlist.backup
 ```
 ```
 sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
 ```
-Generar el nuevo mirrorlist (puede tardar unos minutos)
+Generar el nuevo mirrorlist con los 6 repositorios más rápidos (puedes modificar éste número al que prefieras) ¡PUEDE TARDAR UNOS MINUTOS!
 ```
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 ```
