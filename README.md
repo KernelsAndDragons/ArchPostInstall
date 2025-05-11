@@ -61,7 +61,7 @@ rm /etc/pacman.d/mirrorlist.backup
 ## Firmware Updater
 
 ```
-sudo pacman -S fwupd
+sudo pacman -S fwupd fwupd-efi fwupd-docs
 ```
 
 # Instalación de Servicios y aplicaciones
