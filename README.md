@@ -462,7 +462,6 @@ OSH_THEME="standard"
 ```
 sudo pacman -S zsh wget lsd bat git
 ```
-
 ## Oh-My-ZSH
 
 ```
@@ -489,6 +488,17 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ```
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
+Añadimos los alias para lsd y bat
+
+```
+echo '# ALIAS' >> ~/.zshrc
+echo "alias ls='lsd'" >> ~/.zshrc
+echo "alias ll='lsd -l'" >> ~/.zshrc
+echo "alias la='lsd -a'" >> ~/.zshrc
+echo "alias lla='lsd -la'" >> ~/.zshrc
+echo "alias cat='bat'" >> ~/.zshrc
+```
+
 ---
 ## ZSH PLUGINS  
 
@@ -505,17 +515,6 @@ echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plug
 echo 'source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh' >> ~/.zshrc
 echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh' >> ~/.zshrc
 ```
-(paso opcional) Añadimos los alias para lsd y bat
-
-```
-echo '# ALIAS' >> ~/.zshrc
-echo "alias ls='lsd'" >> ~/.zshrc
-echo "alias ll='lsd -l'" >> ~/.zshrc
-echo "alias la='lsd -a'" >> ~/.zshrc
-echo "alias lla='lsd -la'" >> ~/.zshrc
-echo "alias cat='bat'" >> ~/.zshrc
-```
-
 ---
 
 
