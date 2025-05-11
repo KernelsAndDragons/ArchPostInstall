@@ -541,7 +541,7 @@ echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlight
 ```
 ---
 
-## ICONOS 
+## Iconos 
 <img src="icons/386451_arch%20linux_archlinux_icon.svg" width="50" height="50"><img src="icons/arch-linux-seeklogo.com.svg" width="50" height="50"><img src="icons/archlinux-icon.svg" width="50" height="50">
 
 Puedes descargar iconos `.svg` de arch [aquí](https://github.com/KernelsAndDragons/ArchPostInstall/tree/main/icons)
