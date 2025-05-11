@@ -267,7 +267,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ### Systemd-boot
 `sudo nano  /boot/loader/entries/*.conf `
 
-add `quiet` and `splash`
+añadir al final `quiet` y `splash`
 ```
 options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash
 ```
