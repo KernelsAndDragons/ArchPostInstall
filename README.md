@@ -25,7 +25,7 @@ Enlace al video: https://www.youtube.com/watch?v=YG2oQgGhdIQ
  ParallelDownloads = 10  
  ILoveCandy  
 ```
-## Fastest mirror existent list
+## Mirrorlist más rápidos
 
 mirror list: https://archlinux.org/mirrorlist/all/
 
