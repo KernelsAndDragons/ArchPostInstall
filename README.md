@@ -556,9 +556,10 @@ Navega a tu directorio `.config/fastfetch`
 ```
 cd ~/.config/fastfetch
 ```
-Si no ves una carpeta fastfetch , crea una 
+Si no existe la carpeta fastfetch , creala 
 ```
 mkdir -p ~/.config/fastfetch
+cd ~/.config/fastfetch
 ```
 Genera la configuración por defecto 
 ```
