@@ -573,3 +573,5 @@ Ahora, ejecuta
 ```
 fastfetch
 ```
+<img src="[https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png]" width="450"/>
+
