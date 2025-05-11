@@ -574,7 +574,7 @@ Ahora, ejecuta
 fastfetch
 ```
 ![fastfetch](https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png)
-<img src="[Picture.svg](https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png)" 
+<img src="[](https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png)" 
         alt="Picture" 
         width="800" 
         height="600" 
