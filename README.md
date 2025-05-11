@@ -27,6 +27,8 @@ Enlace al video: https://www.youtube.com/watch?v=YG2oQgGhdIQ
 ```
 ## Fastest mirror existent list
 
+mirror list: https://archlinux.org/mirrorlist/all/
+
 Instalar las dependencias
 ```
 sudo pacman -S  pacman-contrib
