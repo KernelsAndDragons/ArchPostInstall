@@ -490,7 +490,22 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 ---
-## ZSH PLUGINS (SOLO para Oh-My-ZSH) 
+## (RECOMENDADO) ZSH PLUGINS  
+
+```
+sudo pacman -S zsh-autocomplete zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting 
+```
+Los plugins se descargan en la ruta `/usr/share/zsh/plugins/`
+
+Añadimos los plugins al fichero `.zshrc` 
+```
+echo 'source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh' >> ~/.zshrc
+echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh' >> ~/.zshrc
+echo 'source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh' >> ~/.zshrc
+echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh' >> ~/.zshrc
+```
+---
+## (METODO MANUAL) ZSH PLUGINS (SOLO para Oh-My-ZSH) 
 
 ```
 cd ~
