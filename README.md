@@ -505,7 +505,7 @@ echo 'source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-sub
 echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh' >> ~/.zshrc
 ```
 ---
-## (METODO MANUAL) ZSH PLUGINS (SOLO para Oh-My-ZSH) 
+## (NO RECOMENDADO) ZSH PLUGINS (SOLO para Oh-My-ZSH) 
 
 ```
 cd ~
