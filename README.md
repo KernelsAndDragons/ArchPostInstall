@@ -45,6 +45,7 @@ awk '/^## Country Name$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /
 ```
 sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
 ```
+Generar el nuevo mirrorlist
 ```
 rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 ```
