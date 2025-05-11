@@ -166,6 +166,12 @@ sudo pacman -S fuse fuse2fs fuseiso
 sudo pacman -S firefox firefox-i18n-es-es
 ```
 
+## Navegador Vivaldi
+
+```
+sudo pacman -S vivaldi vivaldi-ffmpeg-codecs
+```
+
 ## MDNS para carpetas compartidas en red
 
 ```
