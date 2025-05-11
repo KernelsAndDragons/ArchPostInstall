@@ -25,6 +25,22 @@ Enlace al video: https://www.youtube.com/watch?v=YG2oQgGhdIQ
  ParallelDownloads = 10  
  ILoveCandy  
 ```
+## Fastest mirror existent list
+
+Instalar las dependencias
+```
+sudo pacman -S  pacman-contrib
+```
+
+Ordenar los mirrors
+```
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+awk '/^## Country Name$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /etc/pacman.d/mirrorlist.backup
+sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+rm /etc/pacman.d/mirrorlist.backup
+```
 
 # Instalación de Servicios y aplicaciones
 
@@ -464,7 +480,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 ---
-## ZSH PLUGINS (SOLO para Oh-My-ZSH)
+## ZSH PLUGINS (SOLO para Oh-My-ZSH) 
 
 ```
 cd ~
