@@ -288,7 +288,7 @@ sudo systemctl enable apparmor.service
 ### Grub
 ---
 `sudo nano /etc/default/grub`
-Añadir `apparmor=1 security=apparmor` al final
+añadir `apparmor=1 security=apparmor` al final
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
 ```
@@ -296,7 +296,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor
 
 ### Systemd-boot
 `sudo nano  /boot/loader/entries/*.conf `
-Añadir `apparmor=1 security=apparmor` al final
+añadir `apparmor=1 security=apparmor` al final
 ```
 options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash apparmor=1 security=apparmor
 ```
