@@ -299,45 +299,83 @@ sudo mkinitcpio -P
 
 ## AppArmor
 
+Inserta la siguiente línea en la terminal
 ```
-sudo pacman -S apparmor
+zgrep CONFIG_LSM= /proc/config.gz
 ```
 
-```
-sudo systemctl enable apparmor.service
-```
-> Puedes encontrar varios perfiles predefinidos de Apparmor en la ruta `/usr/share/apparmor/extra-profiles`
-
-> Puedes obtener información del uso de perfiles con `cat /usr/share/apparmor/extra-profiles/README`
-
-### Grub
+### OPCIÓN 1 Para Grub
 ---
-`sudo nano /etc/default/grub`
-añadir `apparmor=1 security=apparmor` al final
 ```
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash apparmor=1 security=apparmor"
+sudo nano /etc/default/grub
 ```
----
 
-### Systemd-boot
----
-`sudo nano  /boot/loader/entries/*.conf `
-añadir `apparmor=1 security=apparmor` al final
+Modificar la siguiente línea de esta manera
 ```
-options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash apparmor=1 security=apparmor
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1"
+```
+
+Actualizar grub
+```
+sudo grup-mkconfig -o /boot/grub/grub.cfg
 ```
 ---
+### OPCIÓN 2 Para systemd-boot
+---
+```
+sudo nano /boot/loader/entries/*.conf  
+```
 
+Modificar la siguiente línea de esta manera
 ```
-sudo grub-mkconfig -o /boot/grub/grub.cfg
+options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1
 ```
-## Locate
+---
 
+Instalar paquetes y dependencias
 ```
-sudo pacman -S locate
+sudo pacman -S tk apparmor python-audit python-notify2
+```
+
+Activar los servicios
+```
+sudo systemctl enable --now apparmor.service
+sudo systemctl enable --now auditd.service
+```
+
+Reiniciar el sistema
+```
+reboot
+```
+Crear grupo audit y añadir usuarios
+```
+sudo groupadd -r audit
+sudo gpasswd -a $(whoami) audit
+```
+
+Añadir a `/etc/audit/auditd.conf` la siguiente línea
+```
+log_group = audit
+```
+
+Crear directorio autostart
+```
+mkdir -p ~/.config/autostart
+```
+
+Creamos el fichero `apparmor-notify.desktop`
+```
+nano ~/.config/autostart/apparmor-notify.desktop
 ```
 ```
-sudo updatedb
+[Desktop Entry]
+Type=Application
+Name=AppArmor Notify
+Comment=Receive on screen notifications of AppArmor denials
+TryExec=aa-notify
+Exec=aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
+StartupNotify=false
+NoDisplay=true
 ```
 
 # Snapshots
