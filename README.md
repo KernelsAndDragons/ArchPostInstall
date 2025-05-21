@@ -276,7 +276,7 @@ añadir `plymouth`
 HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
 ```
 ---
-### Grub
+### OPCIÓN 1 - Grub
 ---
 `sudo nano /etc/default/grub`
 
@@ -284,7 +284,7 @@ HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap conso
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ```
 ---
-### Systemd-boot
+### OPCIÓN 2 - Systemd-boot
 ---
 `sudo nano  /boot/loader/entries/*.conf `
 
