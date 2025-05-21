@@ -317,7 +317,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash lsm=landlock,lockdown,yama,i
 
 Actualizar grub
 ```
-sudo grup-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 ---
 ### OPCIÓN 2 Para systemd-boot
