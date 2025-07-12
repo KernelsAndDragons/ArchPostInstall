@@ -154,6 +154,11 @@ yay -S octopi
 ```
 sudo pacman -S kde-system spectacle gwenview ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools okular kgpg
 ```
+## KDE-Connect
+```
+sudo pacman -S kdeconnect dbus  gcc-libs  glibc  kcmutils  kconfig  kcoreaddons  kcrash  kdbusaddons kdeclarative  kguiaddons  ki18n  kiconthemes  kio  kirigami  kirigami-addons kitemmodels  kjobwidgets  knotifications  kpeople  kservice  kstatusnotifieritem kwidgetsaddons  kwindowsystem  libfakekey  libx11  libxkbcommon  libxtst modemmanager-qt  openssl  pulseaudio-qt  qqc2-desktop-style  qt6-base qt6-connectivity  qt6-declarative  qt6-multimedia  qt6-wayland  solid  wayland
+```
+
 
 ## Bash Scripts
 
@@ -213,12 +218,13 @@ sudo systemctl enable --now firewalld
 ```
 sudo firewall-cmd --set-default-zone=home
 sudo firewall-cmd --permanent --add-service=mdns
+sudo firewall-cmd --permanent --add-service=kdeconnect
 ```
 
 ## Flatpak
 
 ```
-sudo pacman -S flatpak xdg-desktop-portal-gtk xdg-desktop-portal-kde
+sudo pacman -S flatpak flatpak-kcm xdg-desktop-portal-gtk xdg-desktop-portal-kde
 ```
 
 ## Snap
