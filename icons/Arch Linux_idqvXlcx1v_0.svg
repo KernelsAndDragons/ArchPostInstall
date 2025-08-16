@@ -1,0 +1,30 @@
+<svg version="1.1" id="svg2424" xmlns:x="ns_extend;" xmlns:i="ns_ai;" xmlns:graph="ns_graphs;" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 175 166.2" style="enable-background:new 0 0 175 166.2;" xml:space="preserve">
+ <style type="text/css">
+  .st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st1{fill:#FFFFFF;}
+ </style>
+ <metadata>
+  <sfw xmlns="ns_sfw;">
+   <slices>
+   </slices>
+   <sliceSourceBounds bottomLeftOrigin="true" height="166.2" width="175" x="21.8" y="16.6">
+   </sliceSourceBounds>
+  </sfw>
+ </metadata>
+ <g id="layer1" transform="translate(-34.777313,-129.80241)">
+  <g id="g2424" transform="matrix(0.8746356,0,0,0.8746356,14.730518,23.408954)">
+   <path id="path2518" class="st0" d="M117.9,121.6c-8.5,20.7-13.6,34.3-23,54.4c5.8,6.1,12.9,13.2,24.4,21.3
+			c-12.4-5.1-20.8-10.2-27.1-15.5c-12.1,25.1-30.9,61-69.2,129.8c30.1-17.4,53.5-28.1,75.2-32.2c-0.9-4-1.5-8.4-1.4-12.9l0-1
+			c0.5-19.3,10.5-34.1,22.4-33.1s21.1,17.5,20.7,36.8c-0.1,3.6-0.5,7.1-1.2,10.4c21.5,4.2,44.6,14.9,74.3,32
+			c-5.9-10.8-11.1-20.5-16.1-29.8c-7.9-6.1-16.1-14-32.8-22.6c11.5,3,19.7,6.4,26.2,10.3C139.4,175.1,135.3,162.5,117.9,121.6z">
+   </path>
+   <g id="text2638">
+    <path id="path3940" class="st1" d="M213.8,294.7v-5.2h-1.9v-0.7h4.7v0.7h-2v5.2H213.8">
+    </path>
+    <path id="path3942" class="st1" d="M217.4,294.7v-5.9h1.2l1.4,4.2c0.1,0.4,0.2,0.7,0.3,0.9c0.1-0.2,0.2-0.5,0.3-0.9l1.4-4.1h1.1
+				v5.9h-0.8v-4.9l-1.7,4.9h-0.7l-1.7-5v5H217.4">
+    </path>
+   </g>
+  </g>
+ </g>
+</svg>
