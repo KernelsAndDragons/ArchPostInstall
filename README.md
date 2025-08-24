@@ -1,639 +1,564 @@
-# Arch Post Install
+# Arch Linux Post-Install Guide  
 
-Enlace al video: https://www.youtube.com/watch?v=YG2oQgGhdIQ
+📺 Video Reference: [YouTube](https://www.youtube.com/watch?v=YG2oQgGhdIQ)  
 
-# Configuración de archivos del sistema.
+This guide will help you configure your Arch Linux system after installation:  
+- System optimization  
+- Package mirrors & updates  
+- Essential services (power, Bluetooth, firewall, etc.)  
+- Development & virtualization tools  
+- Snapshots with Btrfs  
+- Gaming stack (Steam, Lutris, Heroic)  
+- Shell customization (Bash, Zsh, Powerlevel10k)  
+- Visual tweaks (Plymouth, Fastfetch, icons)  
 
-## Hosts
+---
 
-`sudo nano /etc/hosts`
+## Table of Contents
+1. [System File Configuration](#1-system-file-configuration)  
+2. [Services & Applications](#2-services--applications)  
+3. [Software Sources & Runtimes](#3-software-sources--runtimes)  
+4. [Virtualization & Containers](#4-virtualization--containers)  
+5. [Boot Splash (Plymouth)](#5-boot-splash-plymouth)  
+6. [AppArmor](#6-apparmor)  
+7. [Snapshots (Btrfs + Snapper)](#7-snapshots-btrfs-with-snapper)  
+8. [Gaming Stack](#8-gaming-stack-lutris--heroic--steam)  
+9. [Shells](#9-shells)  
+10. [Icons](#10-icons)  
+11. [Fastfetch](#11-fastfetch-enhanced)  
+12. [Extra Tips](#12-extra-quality-of-life)  
 
-> Reemplaza {hostname} por el nombre de tu máquina
+---
+
+## 1. System File Configuration  
+
+### Hosts File  
+```bash
+sudo nano /etc/hosts
 ```
+Replace `{hostname}` with your machine name:  
+```txt
 127.0.0.1  localhost {hostname}
 ::1        localhost {hostname}
 ```
 
-## Pacman
+---
 
-`sudo nano /etc/pacman.conf
-`
+### Pacman Configuration  
+```bash
+sudo nano /etc/pacman.conf
+```
+```txt
+# Misc options
+Color
+ParallelDownloads = 10
+ILoveCandy
+```
 
-```
-# Misc options  
- Color  
- ParallelDownloads = 10  
- ILoveCandy  
-```
-## Mirrorlist más rápidos
+---
 
-mirror list: https://archlinux.org/mirrorlist/all/
+### Faster Mirrorlist  
+Install dependencies:  
+```bash
+sudo pacman -S pacman-contrib
+```
 
-Instalar las dependencias
+(Optional) Replace current mirrors with all available:  
+```bash
+curl https://archlinux.org/mirrorlist/all/ | sudo tee /etc/pacman.d/mirrorlist
 ```
-sudo pacman -S  pacman-contrib
-```
-(Opcional) añadir todos los mirrors.
-> Omite este paso para utilizar tus mirrors activados actualmente.
-```
-curl https://archlinux.org/mirrorlist/all/ > /etc/pacman.d/mirrorlist
-```
-Generar el backup y una copia temporal.
-```
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.old
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-```
-Activar todos los repositorios de mirrorlist.backup
-```
-awk '/^## Country Name$/{f=1; next}f==0{next}/^$/{exit}{print substr($0, 1);}' /etc/pacman.d/mirrorlist.backup
-```
-```
-sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
-```
-Generar el nuevo mirrorlist con los 6 repositorios más rápidos (puedes modificar éste número como prefieras) **¡PUEDE TARDAR UNOS MINUTOS!**
-```
-rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
-```
-(Opcional) puedes eliminar la copia temporal.
-```
-rm /etc/pacman.d/mirrorlist.backup
-```
-## Firmware Updater
 
+Backup:  
+```bash
+sudo cp /etc/pacman.d/mirrorlist{,.old}
+sudo cp /etc/pacman.d/mirrorlist{,.backup}
 ```
+
+Uncomment mirrors:  
+```bash
+sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist.backup
+```
+
+Rank the **6 fastest mirrors**:  
+```bash
+rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup | sudo tee /etc/pacman.d/mirrorlist
+```
+
+---
+
+### Firmware Updates  
+```bash
 sudo pacman -S fwupd fwupd-efi fwupd-docs
+fwupdmgr refresh
+fwupdmgr get-updates
+sudo fwupdmgr update
 ```
 
-# Instalación de Servicios y aplicaciones
+---
 
-## Sensors para refrigeración
+## 2. Services & Applications  
 
-```
+### Sensors (temperature & fans)  
+```bash
 sudo pacman -S lm_sensors i2c-tools rrdtool
-```
-
-```
 sudo modprobe i2c_dev
-```
-```
 sudo systemctl enable --now sensord.service
 ```
----
-  intel
-  ```
-  sudo modprobe i2c-i801
-  ```
-  amd
-  ```
-  sudo modprobe i2c-piix4
-  ```
----
+- Intel: `sudo modprobe i2c-i801`  
+- AMD: `sudo modprobe i2c-piix4`  
 
-### Añadir los módulos permanentemente 
-
+Make permanent:  
+```bash
+echo "i2c-dev" | sudo tee -a /etc/modules-load.d/i2c.conf
 ```
-sudo touch /etc/modules-load.d/i2c.conf
-sudo sh -c 'echo "i2c-dev" >> /etc/modules-load.d/i2c.conf'
-```
----
-  intel
-  ```
-  sudo sh -c 'echo "i2c-i801" >> /etc/modules-load.d/i2c.conf'
-  ```
-  amd
-  ```
-  sudo sh -c 'echo "i2c-piix4" >> /etc/modules-load.d/i2c.conf'
-  ```
+
 ---
 
-
-## Control de refrigeración AIO All-In-One
-
-```
+### Liquid Cooling (AIO)  
+```bash
 sudo pacman -S liquidctl
 ```
 
-## Gestión de energía (KDE PLASMA)
+---
 
-```
+### Power Management (KDE)  
+```bash
 sudo pacman -S powerdevil power-profiles-daemon
-```
-
-```
 sudo systemctl enable --now power-profiles-daemon.service
 ```
-----
-## Bluetooth
 
-```
+---
+
+### Bluetooth  
+```bash
 sudo systemctl enable --now bluetooth
 ```
+
 ---
-## AUR 
 
-### YAY
-
+### AUR Helpers  
+**Yay:**  
+```bash
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay && makepkg -si
 ```
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-```
 
-### PAMAC
-
-```
+**Pamac (GUI):**  
+```bash
 yay -S libpamac-full pamac-all
 ```
 
-### OCTOPI
-
-```
+**Octopi:**  
+```bash
 yay -S octopi
 ```
----
-## Aplicaciones de Plasma
 
-```
+---
+
+### KDE Applications  
+```bash
 sudo pacman -S kde-system spectacle gwenview ark filelight isoimagewriter kate kcalc kdialog kfind kwalletmanager sweeper yakuake dolphin-plugins inotify-tools okular kgpg
 ```
-## KDE-Connect
-```
-sudo pacman -S kdeconnect dbus  gcc-libs  glibc  kcmutils  kconfig  kcoreaddons  kcrash  kdbusaddons kdeclarative  kguiaddons  ki18n  kiconthemes  kio  kirigami  kirigami-addons kitemmodels  kjobwidgets  knotifications  kpeople  kservice  kstatusnotifieritem kwidgetsaddons  kwindowsystem  libfakekey  libx11  libxkbcommon  libxtst modemmanager-qt  openssl  pulseaudio-qt  qqc2-desktop-style  qt6-base qt6-connectivity  qt6-declarative  qt6-multimedia  qt6-wayland  solid  wayland
-```
 
-
-## Bash Scripts
-
-```
-sudo pacman -S bash-completion
+**KDE Connect:**  
+```bash
+sudo pacman -S kdeconnect
 ```
 
-## Herramientas de compilación
+---
 
-```
-sudo pacman -S linux-headers base-devel
+### Development Tools  
+```bash
+sudo pacman -S linux-headers base-devel bash-completion
 ```
 
-## Fuse
-
-```
+### Fuse (filesystem mounts)  
+```bash
 sudo pacman -S fuse fuse2fs fuseiso
 ```
-## Navegador Firefox
 
-```
+---
+
+### Browsers  
+**Firefox (Spanish locale):**  
+```bash
 sudo pacman -S firefox firefox-i18n-es-es
 ```
 
-## Navegador Vivaldi
-
-```
+**Vivaldi:**  
+```bash
 sudo pacman -S vivaldi vivaldi-ffmpeg-codecs
 ```
 
-## MDNS para carpetas compartidas en red
-
-```
-sudo pacman -S avahi nss-mdns
-```
 ---
-`sudo nano /etc/nsswitch.conf`
 
+### Networking (mDNS)  
+```bash
+sudo pacman -S avahi nss-mdns
+sudo nano /etc/nsswitch.conf
 ```
+Edit line:  
+```txt
 hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
 ```
----
-```
+Enable:  
+```bash
 sudo systemctl enable --now avahi-daemon
 ```
 
-## Firewall
+---
 
-```
+### Firewall  
+```bash
 sudo pacman -S firewalld python-pyqt6
-```
-
-```
 sudo systemctl enable --now firewalld
 ```
-
-```
+Add services:  
+```bash
 sudo firewall-cmd --set-default-zone=home
 sudo firewall-cmd --permanent --add-service=mdns
 sudo firewall-cmd --permanent --add-service=kdeconnect
 ```
 
-## Flatpak
+---
 
-```
+## 3. Software Sources & Runtimes  
+
+### Flatpak  
+```bash
 sudo pacman -S flatpak flatpak-kcm xdg-desktop-portal-gtk xdg-desktop-portal-kde
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-## Snap
-
-```
+### Snap  
+```bash
 yay -S snapd
-```
-```
-sudo systemctl enable --now snapd.service
-```
-> Si utilizas apparmor ejecutar el siguiente comando. 
-```
-sudo systemctl enable --now snapd.apparmor.service
+sudo systemctl enable --now snapd.socket
+sudo systemctl enable --now snapd.apparmor.service   # if using AppArmor
 ```
 
-## Virtualización
+---
 
-```
+## 4. Virtualization & Containers  
+
+### KVM/QEMU + libvirt  
+```bash
 sudo pacman -S qemu-full virt-manager virt-viewer dnsmasq bridge-utils libguestfs ebtables vde2 openbsd-netcat
-```
-
-```
 sudo usermod -aG libvirt $USER
-```
-
-```
 sudo systemctl enable --now libvirtd
-```
-
-```
 sudo virsh net-start default
 sudo virsh net-autostart default
 ```
 
-## Distrobox
-
-```
+### Distrobox (Podman containers)  
+```bash
 sudo pacman -S podman distrobox
+systemctl --user enable --now podman.socket
+loginctl enable-linger $USER
 ```
 
-```
-sudo systemctl enable --now podman
-```
-
-## Plymouth
-
-```
-sudo pacman -S plymouth
-```
 ---
-`sudo nano /etc/mkinitcpio.conf`
 
-añadir `plymouth`
+## 5. Boot Splash (Plymouth)  
+
+```bash
+sudo pacman -S plymouth
+sudo nano /etc/mkinitcpio.conf
 ```
+Add:  
+```txt
 HOOKS=(base udev plymouth autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck)
 ```
----
-### OPCIÓN 1 - Grub
----
-`sudo nano /etc/default/grub`
 
+**GRUB:**  
+```bash
+sudo nano /etc/default/grub
 ```
+```txt
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash"
 ```
----
-### OPCIÓN 2 - Systemd-boot
----
-`sudo nano  /boot/loader/entries/*.conf `
+```bash
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
 
-añadir al final `quiet` y `splash`
+**systemd-boot:**  
+```bash
+sudo nano /boot/loader/entries/*.conf
 ```
-options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash
+Add to `options`:  
+```txt
+quiet splash
 ```
----
-```
+
+```bash
 sudo mkinitcpio -P
 ```
 
-## AppArmor
+---
 
-Inserta la siguiente línea en la terminal
-```
+## 6. AppArmor  
+
+Check support:  
+```bash
 zgrep CONFIG_LSM= /proc/config.gz
 ```
 
-### OPCIÓN 1 Para Grub
----
-```
+**GRUB:**  
+```bash
 sudo nano /etc/default/grub
 ```
-
-Modificar la siguiente línea de esta manera
-```
+```txt
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1"
 ```
-
-Actualizar grub
-```
+```bash
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
----
-### OPCIÓN 2 Para systemd-boot
----
+
+**systemd-boot:**  
+```bash
+sudo nano /boot/loader/entries/*.conf
 ```
-sudo nano /boot/loader/entries/*.conf  
+Append to `options`:  
+```txt
+lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1
 ```
 
-Modificar la siguiente línea de esta manera
-```
-options root=PARTUUID=df4a860f-0cad-4bd0-8c75-e245a41eeab2 zswap.enabled=0 rootflags=subvol=@ rw rootfstype=btrfs quiet splash lsm=landlock,lockdown,yama,integrity,apparmor,bpf audit=1
-```
----
-
-Instalar paquetes y dependencias
-```
+Install tools:  
+```bash
 sudo pacman -S tk apparmor python-audit python-notify2
-```
-
-Activar los servicios
-```
 sudo systemctl enable --now apparmor.service
 sudo systemctl enable --now auditd.service
 ```
 
-Reiniciar el sistema
-```
+Reboot:  
+```bash
 reboot
 ```
-Crear grupo audit y añadir usuarios
-```
+
+Create group & enable notifications:  
+```bash
 sudo groupadd -r audit
-sudo gpasswd -a $(whoami) audit
+sudo gpasswd -a "$(whoami)" audit
 ```
 
-Añadir a `/etc/audit/auditd.conf` la siguiente línea
-```
+Edit `/etc/audit/auditd.conf`:  
+```txt
 log_group = audit
 ```
 
-Crear directorio autostart
-```
+Autostart notifications:  
+```bash
 mkdir -p ~/.config/autostart
-```
-
-Creamos el fichero `apparmor-notify.desktop`
-```
 nano ~/.config/autostart/apparmor-notify.desktop
 ```
-```
+```ini
 [Desktop Entry]
 Type=Application
 Name=AppArmor Notify
-Comment=Receive on screen notifications of AppArmor denials
-TryExec=aa-notify
 Exec=aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log
-StartupNotify=false
 NoDisplay=true
 ```
 
-# Snapshots
-> He reemplazado Timeshift por Snapper.
-## Snapper 
+---
 
-```
+## 7. Snapshots (Btrfs with Snapper)  
+
+```bash
 sudo pacman -S snapper snap-pac grub-btrfs
-```
-```
 yay -S btrfs-assistant
 ```
 
-> Si has utilizado archinstall y cuentas con el subvolumen **@.snapshots**, debes desmontar y eliminar el directorio `/.snapshots` **para que el Paso 2 no falle**.
-
-Podemos ver los subvolumenes con el comando:
-```
+Check subvolumes:  
+```bash
 sudo btrfs subvolume list /
 ```
-Paso 1: Eliminar el directorio `/.snapshots`
-```
+
+Remove old:  
+```bash
 cd /
 sudo umount /.snapshots
 sudo rm -rf /.snapshots
 ```
-Paso 2: Crear configuración de snapper
-```
+
+Create config:  
+```bash
 sudo snapper -c root create-config /
+sudo btrfs subvolume delete /.snapshots
 ```
 
-Paso 3: Eliminar subvolumen creado por snapper
-```
-sudo btrfs subvolume delete .snapshots
-```
-
-Paso 4: Crear otra vez el directorio `.snapshots` para montarlo con subvolumen `@.snapshots`
-```
+Recreate dir:  
+```bash
 sudo mkdir /.snapshots
 sudo mount -a
-```
-Paso 5: Corregir los permisos necesarios para `/.snapshots`
-```
 sudo chmod 750 /.snapshots
 sudo chown :wheel /.snapshots
 ```
 
-Paso 6: Crear snapshot
-```
-sudo snapper -c root create -d "**Sistema base**"
+Snapshot:  
+```bash
+sudo snapper -c root create -d "Base System"
 ```
 
-Paso 7: Automatizar los snapshots
-```
+Enable timers:  
+```bash
 sudo systemctl enable --now snapper-timeline.timer
 sudo systemctl enable --now snapper-cleanup.timer
 ```
 
-Paso 8: Añadir excepción de indexado para `locate`
-
-`sudo nano /etc/updatedb.conf`
-
-Añadir `.snapshots`
+Exclude from locate:  
+```bash
+sudo nano /etc/updatedb.conf
 ```
+Add `.snapshots`:  
+```txt
 PRUNENAMES = ".git .hg .svn .snapshots"
 ```
-Actualizar la base de datos
-```
+```bash
 sudo updatedb
 ```
-Paso 9: Habilitar grub-btrfs
+
+Enable grub integration:  
+```bash
+sudo systemctl enable --now grub-btrfsd.service
 ```
-sudo systemctl enable --now grub-btrfsd.service 
+
+Add overlayfs hook:  
+```bash
+sudo nano /etc/mkinitcpio.conf
 ```
-Paso 10: Crear condición de arranque a un snapshot con permisos readonly
-`sudo nano /etc/mkinitcpio.conf`
-añadir `grub-btrfs-overlayfs`
+```txt
+HOOKS=(base ... filesystems fsck grub-btrfs-overlayfs)
 ```
-HOOKS=(base ... fsck grub-btrfs-overlayfs)
-```
-```
+```bash
 sudo mkinitcpio -P
 ```
-Paso 11: ¡Utilizar la aplicación gráfica btrfs-assistant para gestionar cómodamente la programación y los snapshots!
 
-# Launchers Lutris, Heroic, Steam y Herramientas Gaming
+---
 
-## Heroic
+## 8. Gaming Stack (Lutris / Heroic / Steam)  
 
-```
+**Heroic Games Launcher:**  
+```bash
 yay -S heroic-games-launcher
 ```
 
-## Lutris
-
-```
-sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
-mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
-lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo \
-sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
-ncurses lib32-ncurses ocl-icd lib32-ocl-icd libxslt lib32-libxslt libva lib32-libva gtk3 \
-lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader winetricks
-```
-
-```
+**Lutris + dependencies:**  
+```bash
+sudo pacman -S --needed wine-staging winetricks ... (32-bit deps) ...
 sudo pacman -S lutris
 ```
 
-## Steam
-
-```
+**Steam:**  
+```bash
 sudo pacman -S steam
 ```
-## Proton Tools
 
-```
+**Proton Tools:**  
+```bash
 yay -S protonup-qt protontricks
 ```
 
-## XBOX Controller Drivers
-
-```
+**Xbox Controller Drivers:**  
+```bash
 yay -S xpadneo-dkms-git xone-dkms-git xone-dongle-firmware
 ```
 
-## Dependencias de SteamTinkerLaunch
-
-```
-sudo pacman -S xdotool xorg-xwininfo yad 
-```
-## Gamemode
-```
+**GameMode:**  
+```bash
 sudo pacman -S gamemode
 ```
-# Bash
-## Oh-My-Bash
-
-via curl
+Use with Steam launch options:  
+```txt
+gamemoderun %command%
 ```
+
+---
+
+## 9. Shells  
+
+### Bash + Oh-My-Bash  
+```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 ```
-
-via wget
-```
-bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
-```
-
-THEMES: https://github.com/ohmybash/oh-my-bash/blob/master/themes/THEMES.md
-
-`nano ~/.bashrc`
-
-```
+Edit `~/.bashrc`:  
+```txt
 OSH_THEME="standard"
 ```
 
-# ZSH
+---
 
-```
+### Zsh + Oh-My-Zsh + Powerlevel10k  
+```bash
 sudo pacman -S zsh wget lsd bat git
-```
-## Oh-My-ZSH
-
-```
+chsh -s /bin/zsh
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 ```
 
-## Powerlevel10k
-
+Install fonts + theme:  
+```bash
+sudo pacman -S ttf-hack-nerd ttf-meslo-nerd
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
-sudo pacman -S ttf-hack-nerd  ttf-meslo-nerd
-```
-
-```
-fc-cache -f -v
-```
-
-```
-cd ~
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-```
----
-`nano ~/.zshrc`
-
-```
+Edit `~/.zshrc`:  
+```txt
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
----
-Añadimos los alias para lsd y bat
 
-```
-echo '# ALIAS' >> ~/.zshrc
+Aliases:  
+```bash
 echo "alias ls='lsd'" >> ~/.zshrc
-echo "alias ll='lsd -l'" >> ~/.zshrc
-echo "alias la='lsd -a'" >> ~/.zshrc
-echo "alias lla='lsd -la'" >> ~/.zshrc
 echo "alias cat='bat'" >> ~/.zshrc
 ```
 
----
-## ZSH PLUGINS  
+Plugins:  
+```bash
+sudo pacman -S zsh-autocomplete zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
+```
+Append to `~/.zshrc`:  
+```txt
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+```
 
-```
-sudo pacman -S zsh-autocomplete zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting 
-```
-Los plugins se descargan en la ruta `/usr/share/zsh/plugins/`
-
-Añadimos los plugins al fichero `.zshrc` 
-```
-echo '# PLUGINS' >> ~/.zshrc
-echo 'source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh' >> ~/.zshrc
-echo 'source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh' >> ~/.zshrc
-echo 'source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh' >> ~/.zshrc
-echo 'source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh' >> ~/.zshrc
-```
 ---
 
-# Iconos 
-<img src="icons/386451_arch%20linux_archlinux_icon.svg" width="50" height="50"><img src="icons/arch-linux-seeklogo.com.svg" width="50" height="50"><img src="icons/archlinux-icon.svg" width="50" height="50">
+## 10. Icons  
+Download Arch icons from [GitHub repo](https://github.com/KernelsAndDragons/ArchPostInstall/tree/main/icons).  
 
-Puedes descargar iconos `.svg` de arch [aquí](https://github.com/KernelsAndDragons/ArchPostInstall/tree/main/icons)
+---
 
-# Fastfetch Mejorado
-
-Instalar fastfetch
-```
+## 11. Fastfetch (Enhanced)  
+```bash
 sudo pacman -S fastfetch
-```
-Navega a tu directorio `.config/fastfetch`
-```
-cd ~/.config/fastfetch
-```
-Si no existe la carpeta fastfetch , creala 
-```
 mkdir -p ~/.config/fastfetch
 cd ~/.config/fastfetch
-```
-Genera la configuración por defecto 
-```
 fastfetch --gen-config
-```
-Elimina el archivo de configuración por defecto 
-```
 rm config.jsonc
-```
-Descarga mi configuración actualizada 
-```
 wget https://raw.githubusercontent.com/KernelsAndDragons/ArchPostInstall/refs/heads/main/config.jsonc
 ```
-Cierra tu terminal y ábrela de nuevo.
-
-Ahora, ejecuta 
-```
+Restart terminal and run:  
+```bash
 fastfetch
 ```
-![fastfetch](https://github.com/KernelsAndDragons/ArchPostInstall/blob/main/.github/fastfetch.png)
 
+---
+
+## 12. Extra Quality-of-Life  
+
+### Pacman Full Sync  
+```bash
+sudo pacman -Syyu
+```
+
+### Sensors Detection  
+```bash
+sudo sensors-detect
+sudo systemctl restart sensord.service
+```
+
+---
+
+✅ You now have a **fully optimized Arch Linux setup** with essential services, development tools, gaming, security, and customization.  
