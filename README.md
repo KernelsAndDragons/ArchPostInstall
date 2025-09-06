@@ -175,7 +175,7 @@ sudo pacman -S linux-headers base-devel bash-completion
 
 ### Fuse (filesystem mounts)  
 ```bash
-sudo pacman -S fuse fuse2fs fuseiso lvm2
+sudo pacman -S fuse fuse2fs fuseiso lvm2 dosfstools
 ```
 
 ---
